@@ -1,6 +1,7 @@
 package LogicGate.Main;
 
 import LogicGate.Gates.AndGate;
+import LogicGate.Gates.BufferGate;
 import LogicGate.Gates.OrGate;
 import LogicGate.Gates.XorGate;
 import LogicGate.Nodes.InputNode;
@@ -55,9 +56,11 @@ public class LogicGateMain extends Application {
         AndGate andGate = new AndGate(pane,height,width);
         OrGate orGate = new OrGate(pane, height,width);
         XorGate xorGate = new XorGate(pane, height,width);
+        BufferGate bufferGate = new BufferGate(pane, height,width);
         andGate.draw();
         orGate.draw();
         xorGate.draw();
+        bufferGate.draw();
 
     }
 
