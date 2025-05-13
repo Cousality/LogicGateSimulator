@@ -5,7 +5,7 @@ import javafx.scene.layout.Pane;
 
 
 public class OutputNode extends Node {
-    private Connection connection;
+    protected Connection connection;
 
     public OutputNode(Pane pane){
         super(pane);

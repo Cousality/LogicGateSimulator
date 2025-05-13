@@ -13,6 +13,7 @@ public abstract class Gate {
     protected Group gateGroup;
     protected boolean moved = false;
 
+
     public Gate(Pane pane, double height, double width){
         this.height = height/15;
         this.width = width/25;

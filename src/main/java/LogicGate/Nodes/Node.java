@@ -31,7 +31,6 @@ public abstract class Node{
                 delete();
             }
         });
-
     }
 
     public void delete() {

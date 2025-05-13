@@ -30,7 +30,7 @@ public class LogicGateMain extends Application {
         Line leftLine = createLine(0.1,screenWidth,screenHeight);
         Line rightLine = createLine(0.9,screenWidth,screenHeight);
 
-        AndGate andGate = CreateGates(root, screenHeight, screenWidth);
+        CreateGates(root, screenHeight, screenWidth);
 
 
 
@@ -39,8 +39,6 @@ public class LogicGateMain extends Application {
 
         lineClickHandler(leftLine, "input", root);
         lineClickHandler(rightLine,"output",root);
-
-
 
     }
 
@@ -51,10 +49,10 @@ public class LogicGateMain extends Application {
         return createdLine;
     }
 
-    private AndGate CreateGates(Pane pane, double height, double width){
+    private void CreateGates(Pane pane, double height, double width){
         AndGate andGate = new AndGate(pane,height,width);
         andGate.draw();
-        return andGate;
+
     }
 
     private static void lineClickHandler(Line line, String type, Pane root) {

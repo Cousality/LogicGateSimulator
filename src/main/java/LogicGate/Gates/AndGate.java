@@ -1,5 +1,6 @@
 package LogicGate.Gates;
 
+import LogicGate.Nodes.GateInputNode;
 import javafx.scene.Group;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
@@ -8,9 +9,14 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
 public class AndGate extends Gate {
-
+    private GateInputNode inputNode1;
+    private GateInputNode inputNode2;
+    private Line inputLine1;
+    private Line inputLine2;
+    private Line outputLine;
 
 
     public AndGate(Pane pane, double height, double width){
@@ -22,10 +28,10 @@ public class AndGate extends Gate {
         gateGroup = new Group();
         double radius = height / 2.0;
 
-        Line inputLine1 = new Line(-width/2 , (height/4), 0 , (height/4));
-        Line inputLine2 = new Line(-width/2, (height/4)*3, 0, (height/4)*3);
+        inputLine1 = new Line(-width/2 , (height/4), 0 , (height/4));
+        inputLine2 = new Line(-width/2, (height/4)*3, 0, (height/4)*3);
 
-        Line outputLine = new Line(width, height/2, width*1.5, height / 2 );
+        outputLine = new Line(width, height/2, width*1.5, height / 2 );
 
         Line topLine = new Line(0, 0, width - radius, 0);
         Line bottomLine = new Line(0, height, width - radius, height);
@@ -55,6 +61,8 @@ public class AndGate extends Gate {
         setLineProperties(outputLine);
 
         gateGroup.getChildren().addAll(hitBox, outputLine,inputLine1,inputLine2, backLine, topLine, bottomLine, arc);
+
+        createInputNodes();
 
         gateClickHandler(gateGroup);
         parentPane.getChildren().add(gateGroup);
@@ -88,21 +96,46 @@ public class AndGate extends Gate {
 
             }
         });
+    }
+
+    private void createInputNodes(){
+        inputNode1 = new GateInputNode(parentPane, true);
+        inputNode2 = new GateInputNode(parentPane, false);
+
+        double initialX = gateGroup.getTranslateX();
+        double initialY = gateGroup.getTranslateY();
+
+        inputNode1.draw(initialX + inputLine1.getStartX(), initialY + inputLine1.getStartY());
+        inputNode2.draw(initialX + inputLine2.getStartX(), initialY + inputLine2.getStartY());
+
+
 
 
 
     }
     private void createDuplicate() {
-        AndGate duplicate = new AndGate(parentPane, sceneHeight, sceneWidth); // Convert back to original dimensions
+        AndGate duplicate = new AndGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
 
     public void update(double x, double y){
         gateGroup.setTranslateX(x);
         gateGroup.setTranslateY(y);
+
+        if (inputNode1 != null && inputNode2 != null) {
+            inputNode1.update(x + inputLine1.getStartX(), y +inputLine1.getStartY());
+            inputNode2.update(x + inputLine2.getStartX(), y +inputLine2.getStartY());
+        }
     }
 
     public void delete(){
+        if (inputNode1 != null) {
+            inputNode1.delete();
+        }
+        if (inputNode2 != null) {
+            inputNode2.delete();
+        }
+
         parentPane.getChildren().remove(gateGroup);
 
     }

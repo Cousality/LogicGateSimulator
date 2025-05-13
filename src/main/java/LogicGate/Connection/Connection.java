@@ -9,6 +9,7 @@ import LogicGate.Nodes.InputNode;
 import LogicGate.Nodes.OutputNode;
 import LogicGate.Nodes.Node;
 
+
 public class Connection {
 
     private Line line;
@@ -17,6 +18,7 @@ public class Connection {
     private OutputNode targetNode;
     private boolean state = false;
     private boolean connected = false;
+    private OutputNode closestOutputNode;
 
     private static final double SNAP_DISTANCE = 20.0;
 
@@ -49,7 +51,7 @@ public class Connection {
 
     }
     public void update(double endX, double endY){
-        OutputNode closestOutputNode = findClosestOutputNode(endX,endY);
+        closestOutputNode = findClosestOutputNode(endX,endY);
         if (closestOutputNode != null && !closestOutputNode.isConnected()){
             Circle nodeCircle = closestOutputNode.getCircle();
             line.setEndX(nodeCircle.getCenterX());
@@ -63,10 +65,12 @@ public class Connection {
             connected = false;
             targetNode = null;
         }
+    }
 
-
-
-
+    public void updateWithGate(){
+        Circle nodeCircle = closestOutputNode.getCircle();
+        line.setEndX(nodeCircle.getCenterX());
+        line.setEndY(nodeCircle.getCenterY());
     }
     public void connect(){
         targetNode.connected(this);
