@@ -71,6 +71,7 @@ public abstract class Gate {
             if (event.getButton() == MouseButton.PRIMARY) {
                 if (!moved){
                     createDuplicate();
+                    checkGateState();
                 }
                 moved = true;
 

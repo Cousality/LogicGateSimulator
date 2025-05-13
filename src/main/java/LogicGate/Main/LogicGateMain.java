@@ -1,9 +1,6 @@
 package LogicGate.Main;
 
-import LogicGate.Gates.AndGate;
-import LogicGate.Gates.BufferGate;
-import LogicGate.Gates.OrGate;
-import LogicGate.Gates.XorGate;
+import LogicGate.Gates.*;
 import LogicGate.Nodes.InputNode;
 import LogicGate.Nodes.OutputNode;
 import javafx.application.Application;
@@ -54,13 +51,21 @@ public class LogicGateMain extends Application {
 
     private void CreateGates(Pane pane, double height, double width){
         AndGate andGate = new AndGate(pane,height,width);
+        NandGate nandGate = new NandGate(pane,height,width);
         OrGate orGate = new OrGate(pane, height,width);
+        NorGate norGate = new NorGate(pane, height , width);
         XorGate xorGate = new XorGate(pane, height,width);
+        XnorGate xnorGate = new XnorGate(pane, height,width);
         BufferGate bufferGate = new BufferGate(pane, height,width);
+        NotGate notGate = new NotGate(pane, height,width);
         andGate.draw();
+        nandGate.draw();
         orGate.draw();
+        norGate.draw();
         xorGate.draw();
+        xnorGate.draw();
         bufferGate.draw();
+        notGate.draw();
 
     }
 
