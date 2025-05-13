@@ -1,6 +1,7 @@
 package LogicGate.Gates;
 
 import LogicGate.Nodes.GateInputNode;
+import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
@@ -9,11 +10,11 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
 
 public class AndGate extends Gate {
     private GateInputNode inputNode1;
     private GateInputNode inputNode2;
+    private GateOutputNode outputNode;
     private Line inputLine1;
     private Line inputLine2;
     private Line outputLine;
@@ -63,6 +64,7 @@ public class AndGate extends Gate {
         gateGroup.getChildren().addAll(hitBox, outputLine,inputLine1,inputLine2, backLine, topLine, bottomLine, arc);
 
         createInputNodes();
+        createOutPutNode();
 
         gateClickHandler(gateGroup);
         parentPane.getChildren().add(gateGroup);
@@ -99,16 +101,27 @@ public class AndGate extends Gate {
     }
 
     private void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane, true);
-        inputNode2 = new GateInputNode(parentPane, false);
+        inputNode1 = new GateInputNode(parentPane);
+        inputNode2 = new GateInputNode(parentPane);
 
-        double initialX = gateGroup.getTranslateX();
-        double initialY = gateGroup.getTranslateY();
+        inputNode1.draw(-100, -100);
+        inputNode2.draw(-100, -100);
 
-        inputNode1.draw(initialX + inputLine1.getStartX(), initialY + inputLine1.getStartY());
-        inputNode2.draw(initialX + inputLine2.getStartX(), initialY + inputLine2.getStartY());
+        inputNode1.setParentGate(this);
+        inputNode2.setParentGate(this);
 
 
+    }
+
+    public boolean getState(){
+        return state;
+    }
+
+    public void createOutPutNode(){
+        outputNode = new GateOutputNode(parentPane);
+        outputNode.draw(-100, -100);
+
+        outputNode.setParentGate(this);
 
 
 
@@ -122,9 +135,20 @@ public class AndGate extends Gate {
         gateGroup.setTranslateX(x);
         gateGroup.setTranslateY(y);
 
-        if (inputNode1 != null && inputNode2 != null) {
+        if (inputNode1 != null && inputNode2 != null && outputNode != null) {
             inputNode1.update(x + inputLine1.getStartX(), y +inputLine1.getStartY());
             inputNode2.update(x + inputLine2.getStartX(), y +inputLine2.getStartY());
+            outputNode.update(x + outputLine.getEndX(), y + outputLine.getEndY());
+        }
+    }
+
+    public void checkGateState(){
+        if (inputNode1.getState() && inputNode2.getState()){
+            state = true;
+            outputNode.changeState();
+        }else{
+            state = false;
+            outputNode.changeState();
         }
     }
 
@@ -134,6 +158,9 @@ public class AndGate extends Gate {
         }
         if (inputNode2 != null) {
             inputNode2.delete();
+        }
+        if (outputNode != null) {
+            outputNode.delete();
         }
 
         parentPane.getChildren().remove(gateGroup);

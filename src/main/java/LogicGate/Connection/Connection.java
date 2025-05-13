@@ -72,6 +72,11 @@ public class Connection {
         line.setEndX(nodeCircle.getCenterX());
         line.setEndY(nodeCircle.getCenterY());
     }
+
+    public void updateStart(double x, double y){
+        line.setStartX(x);
+        line.setStartY(y);
+    }
     public void connect(){
         targetNode.connected(this);
         targetNode.changeState();

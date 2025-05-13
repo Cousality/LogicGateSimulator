@@ -1,17 +1,16 @@
 package LogicGate.Nodes;
 
-import LogicGate.Gates.AndGate;
+import LogicGate.Gates.Gate;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class GateInputNode extends OutputNode {
-    private boolean topInput;
-    private AndGate parentGate;
+    private Gate parentGate;
 
-    public GateInputNode(Pane pane, boolean topInput) {
+    public GateInputNode(Pane pane) {
         super(pane);
-        this.topInput = topInput;
+
     }
     @Override
     public void draw(double x, double y) {
@@ -29,12 +28,22 @@ public class GateInputNode extends OutputNode {
         }
     }
 
+    @Override
+    public void changeState(){
+        if (connection != null) {
+            state = connection.getState();
+        } else {
+            state = false;
+        }
+        checkState();
+        parentGate.checkGateState();
 
 
-    public void setParentGate(AndGate gate) {
-        this.parentGate = gate;
     }
 
 
 
+    public void setParentGate(Gate gate) {
+        this.parentGate = gate;
+    }
 }

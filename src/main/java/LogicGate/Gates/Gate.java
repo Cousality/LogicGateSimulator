@@ -12,6 +12,7 @@ public abstract class Gate {
     protected final int lineThiccness = 3;
     protected Group gateGroup;
     protected boolean moved = false;
+    protected boolean state = false;
 
 
     public Gate(Pane pane, double height, double width){
@@ -27,7 +28,13 @@ public abstract class Gate {
         line.setStrokeWidth(lineThiccness);
     }
 
+    public void checkGateState(){
+        System.out.println("Never see");
+    }
 
+    public boolean getState(){
+        return state;
+    }
 
     abstract void draw();
 

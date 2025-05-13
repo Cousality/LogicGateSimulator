@@ -1,31 +1,36 @@
 package LogicGate.Nodes;
 
+import LogicGate.Connection.Connection;
+import LogicGate.Gates.Gate;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import LogicGate.Connection.Connection;
-import java.util.ArrayList;
 
-public class InputNode extends Node {
+public class GateOutputNode extends InputNode {
+    private Gate parentGate;
 
-    protected Connection connection;
-    protected final ArrayList<Connection> connectionList;
-
-    public InputNode(Pane pane){
+    public GateOutputNode(Pane pane){
         super(pane);
 
-        connectionList = new ArrayList<>();
+    }
+
+    public void setParentGate(Gate gate) {
+        this.parentGate = gate;
+    }
+
+    @Override
+    public void draw(double x, double y) {
+
+        circle = new Circle(x, y, 5, Color.WHITE);
+        circle.setUserData(this);
+        nodeClickHandler(circle);
+        parentPane.getChildren().add(circle);
     }
 
     @Override
     public void nodeClickHandler(Circle circle){
-        circle.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.SECONDARY) {
-                delete();
-            } else if (event.getButton() == MouseButton.PRIMARY) {
-                changeState();
-            }
-        });
+
         circle.setOnMousePressed(event ->{
             if (event.getButton() == MouseButton.PRIMARY) {
                 connection = new Connection(parentPane, this);
@@ -50,20 +55,22 @@ public class InputNode extends Node {
         });
 
     }
+
     @Override
     public void changeState(){
-        state = !state;
+        state = parentGate.getState();
         checkState();
         for (Connection con : connectionList ){
             con.updateState();
         }
     }
 
-    @Override
-    public void delete() {
+    public void update(double x, double y){
+        circle.setCenterX(x);
+        circle.setCenterY(y);
         for (Connection con : connectionList ){
-            con.remove();
+            con.updateStart(x,y);
         }
-        super.delete();
+
     }
 }
