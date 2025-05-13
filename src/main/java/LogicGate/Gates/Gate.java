@@ -6,6 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 
 public abstract class Gate {
@@ -38,6 +40,16 @@ public abstract class Gate {
     protected void setLineProperties(Line line) {
         line.setStroke(Color.WHITE);
         line.setStrokeWidth(lineThiccness);
+    }
+
+    protected void setCurveProperties(CubicCurve curve) {
+        curve.setStroke(Color.WHITE);
+        curve.setStrokeWidth(lineThiccness);
+    }
+
+    protected void setArcProperties(Arc arc) {
+        arc.setStroke(Color.WHITE);
+        arc.setStrokeWidth(lineThiccness);
     }
 
     public void gateClickHandler(Group gateGroup){

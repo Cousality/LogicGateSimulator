@@ -2,6 +2,7 @@ package LogicGate.Main;
 
 import LogicGate.Gates.AndGate;
 import LogicGate.Gates.OrGate;
+import LogicGate.Gates.XorGate;
 import LogicGate.Nodes.InputNode;
 import LogicGate.Nodes.OutputNode;
 import javafx.application.Application;
@@ -53,8 +54,10 @@ public class LogicGateMain extends Application {
     private void CreateGates(Pane pane, double height, double width){
         AndGate andGate = new AndGate(pane,height,width);
         OrGate orGate = new OrGate(pane, height,width);
+        XorGate xorGate = new XorGate(pane, height,width);
         andGate.draw();
         orGate.draw();
+        xorGate.draw();
 
     }
 

@@ -7,9 +7,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
-public class OrGate extends Gate{
+public class XorGate extends Gate{
 
-    public OrGate(Pane pane, double height, double width){
+    public XorGate(Pane pane, double height, double width){
         super(pane, height, width);
 
     }
@@ -60,17 +60,27 @@ public class OrGate extends Gate{
         backArc.setType(ArcType.OPEN);
         backArc.setFill(null);
 
+        Arc backerArc = new Arc();
+        backerArc.setCenterX(-width + radius/2);
+        backerArc.setCenterY(height / 2);
+        backerArc.setRadiusX(radius);
+        backerArc.setRadiusY(radius);
+        backerArc.setStartAngle(315);
+        backerArc.setLength(90);
+        backerArc.setType(ArcType.OPEN);
+        backerArc.setFill(null);
+
         setCurveProperties(topArc);
         setCurveProperties(bottomArc);
         setArcProperties(backArc);
-
+        setArcProperties(backerArc);
         setLineProperties(inputLine1);
         setLineProperties(inputLine2);
         setLineProperties(outputLine);
 
 
         gateGroup.getChildren().addAll(
-                hitBox, outputLine, inputLine1, inputLine2, backArc, topArc,bottomArc);
+                hitBox, outputLine, inputLine1, inputLine2, backArc,backerArc, topArc,bottomArc);
 
         createInputNodes();
         createOutPutNode();
@@ -79,7 +89,7 @@ public class OrGate extends Gate{
         parentPane.getChildren().add(gateGroup);
 
         gateGroup.setTranslateX(sceneWidth/35);
-        gateGroup.setTranslateY((sceneHeight/5)*2);
+        gateGroup.setTranslateY((sceneHeight/5)*3);
     }
 
     private void createInputNodes(){
@@ -98,7 +108,7 @@ public class OrGate extends Gate{
 
 
     protected void createDuplicate() {
-        OrGate duplicate = new OrGate(parentPane, sceneHeight, sceneWidth);
+        XorGate duplicate = new XorGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
 
@@ -110,7 +120,7 @@ public class OrGate extends Gate{
     }
 
     public void checkGateState(){
-        if (inputNode1.getState() || inputNode2.getState()){
+        if (inputNode1.getState() && !inputNode2.getState() || !inputNode1.getState() && inputNode2.getState()){
             state = true;
             outputNode.changeState();
         }else{
