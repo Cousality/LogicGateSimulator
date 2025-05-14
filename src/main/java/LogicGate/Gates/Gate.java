@@ -103,6 +103,26 @@ public abstract class Gate {
         }
     }
 
+    protected void createInputNodes(){
+        inputNode1 = new GateInputNode(parentPane);
+        inputNode2 = new GateInputNode(parentPane);
+
+        inputNode1.draw(-100, -100);
+        inputNode2.draw(-100, -100);
+
+        inputNode1.setParentGate(this);
+        inputNode2.setParentGate(this);
+
+
+    }
+
+    protected void createOutPutNode(){
+        outputNode = new GateOutputNode(parentPane);
+        outputNode.draw(-100, -100);
+
+        outputNode.setParentGate(this);
+    }
+
     public void delete(){
         if (inputNode1 != null) {
             inputNode1.delete();

@@ -1,7 +1,5 @@
 package LogicGate.Gates;
 
-import LogicGate.Nodes.GateInputNode;
-import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

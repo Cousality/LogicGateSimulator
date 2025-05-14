@@ -1,6 +1,5 @@
 package LogicGate.Gates;
 
-import LogicGate.Nodes.GateInputNode;
 import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
@@ -65,30 +64,6 @@ public class AndGate extends Gate {
         gateGroup.setTranslateX(sceneWidth/35);
         gateGroup.setTranslateY(sceneHeight/5);
     }
-
-    protected void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane);
-        inputNode2 = new GateInputNode(parentPane);
-
-        inputNode1.draw(-100, -100);
-        inputNode2.draw(-100, -100);
-
-        inputNode1.setParentGate(this);
-        inputNode2.setParentGate(this);
-
-
-    }
-
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
-
-        outputNode.setParentGate(this);
-
-
-
-    }
-
 
     protected void createDuplicate() {
         AndGate duplicate = new AndGate(parentPane, sceneHeight, sceneWidth);

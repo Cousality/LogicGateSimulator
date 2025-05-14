@@ -1,7 +1,6 @@
 package LogicGate.Gates;
 
 import LogicGate.Nodes.GateInputNode;
-import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -48,7 +47,7 @@ public class BufferGate extends Gate {
         gateGroup.setTranslateX(sceneWidth/35);
         gateGroup.setTranslateY(sceneHeight/5*4);
     }
-
+    @Override
     protected void createInputNodes(){
         inputNode1 = new GateInputNode(parentPane);
 
@@ -59,15 +58,7 @@ public class BufferGate extends Gate {
 
     }
 
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
 
-        outputNode.setParentGate(this);
-
-
-
-    }
     @Override
     public void update(double x, double y){
         gateGroup.setTranslateX(x);

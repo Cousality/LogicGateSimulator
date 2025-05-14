@@ -1,7 +1,5 @@
 package LogicGate.Gates;
 
-import LogicGate.Nodes.GateInputNode;
-import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -82,31 +80,9 @@ public class OrGate extends Gate{
         gateGroup.setTranslateY((sceneHeight/5)*2);
     }
 
-    protected void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane);
-        inputNode2 = new GateInputNode(parentPane);
-
-        inputNode1.draw(-100, -100);
-        inputNode2.draw(-100, -100);
-
-        inputNode1.setParentGate(this);
-        inputNode2.setParentGate(this);
-
-
-    }
-
-
-
     protected void createDuplicate() {
         OrGate duplicate = new OrGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
-    }
-
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
-
-        outputNode.setParentGate(this);
     }
 
     public void checkGateState(){
