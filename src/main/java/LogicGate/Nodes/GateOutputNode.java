@@ -57,11 +57,19 @@ public class GateOutputNode extends InputNode {
     }
 
     @Override
-    public void changeState(){
+    public void changeState() {
+        boolean oldState = state;
         state = parentGate.getState();
-        checkState();
-        for (Connection con : connectionList ){
-            con.updateState();
+
+        if (oldState != state) {
+            checkState();
+
+            if (shouldLimitChanges()) {
+                for (Connection con : connectionList) {
+                    con.updateState();
+                }
+                endEvaluation();
+            }
         }
     }
 

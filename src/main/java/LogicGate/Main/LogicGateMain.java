@@ -24,6 +24,7 @@ public class LogicGateMain extends Application {
         stage.setScene(scene);
         stage.show();
 
+        // Getting Screen width
         double screenWidth = scene.getWidth();
         double screenHeight = scene.getHeight();
 

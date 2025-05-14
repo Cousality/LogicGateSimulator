@@ -12,6 +12,11 @@ public abstract class Node{
     protected boolean state = false;
     public final Pane parentPane;
 
+    private static boolean evaluationInProgress = false;
+    private static int maxEvaluationDepth = 100; // Prevent extremely deep evaluations
+    private static int currentEvaluationDepth = 0;
+
+
 
     public Node(Pane pane){
         this.parentPane = pane;
@@ -67,5 +72,29 @@ public abstract class Node{
 
     public boolean isOutputNode() {
         return false;
+    }
+
+    public static void startEvaluation() {
+        evaluationInProgress = true;
+        currentEvaluationDepth = 0;
+    }
+
+    public static void endEvaluation() {
+        evaluationInProgress = false;
+    }
+
+    protected boolean shouldLimitChanges() {
+        if (!evaluationInProgress) {
+            startEvaluation();
+            return true;
+        }
+
+        if (currentEvaluationDepth > maxEvaluationDepth) {
+            endEvaluation();
+            return false;
+        }
+
+        currentEvaluationDepth++;
+        return true;
     }
 }
