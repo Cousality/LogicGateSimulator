@@ -13,7 +13,6 @@ public abstract class Node{
     public final Pane parentPane;
 
     private static boolean evaluationInProgress = false;
-    private static int maxEvaluationDepth = 100; // Prevent extremely deep evaluations
     private static int currentEvaluationDepth = 0;
 
 
@@ -89,6 +88,8 @@ public abstract class Node{
             return true;
         }
 
+        // Prevent extremely deep evaluations
+        int maxEvaluationDepth = 100;
         if (currentEvaluationDepth > maxEvaluationDepth) {
             endEvaluation();
             return false;

@@ -49,7 +49,7 @@ public class BufferGate extends Gate {
         gateGroup.setTranslateY(sceneHeight/5*4);
     }
 
-    private void createInputNodes(){
+    protected void createInputNodes(){
         inputNode1 = new GateInputNode(parentPane);
 
         inputNode1.draw(-100, -100);

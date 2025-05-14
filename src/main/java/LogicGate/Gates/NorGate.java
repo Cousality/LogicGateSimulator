@@ -1,13 +1,11 @@
 package LogicGate.Gates;
 
-import LogicGate.Nodes.GateInputNode;
-import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
-public class NorGate extends Gate{
+public class NorGate extends OrGate{
 
     public NorGate(Pane pane, double height, double width){
         super(pane, height, width);
@@ -84,33 +82,14 @@ public class NorGate extends Gate{
         gateGroup.setTranslateY((sceneHeight/5)*2);
     }
 
-    private void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane);
-        inputNode2 = new GateInputNode(parentPane);
-
-        inputNode1.draw(-100, -100);
-        inputNode2.draw(-100, -100);
-
-        inputNode1.setParentGate(this);
-        inputNode2.setParentGate(this);
-
-
-    }
-
-
-
+    @Override
     protected void createDuplicate() {
         NorGate duplicate = new NorGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
 
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
 
-        outputNode.setParentGate(this);
-    }
-
+    @Override
     public void checkGateState(){
         if (inputNode1.getState() || inputNode2.getState()){
             state = false;

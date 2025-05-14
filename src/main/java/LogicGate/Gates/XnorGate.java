@@ -7,13 +7,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
-public class XnorGate extends Gate{
+public class XnorGate extends XorGate{
 
     public XnorGate(Pane pane, double height, double width){
         super(pane, height, width);
 
     }
-
+    @Override
     public void draw() {
         gateGroup = new Group();
         inputLine1 = new Line(-width/2 , (height/4), 0 , (height/4));
@@ -95,33 +95,17 @@ public class XnorGate extends Gate{
         gateGroup.setTranslateY((sceneHeight/5)*3);
     }
 
-    private void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane);
-        inputNode2 = new GateInputNode(parentPane);
-
-        inputNode1.draw(-100, -100);
-        inputNode2.draw(-100, -100);
-
-        inputNode1.setParentGate(this);
-        inputNode2.setParentGate(this);
-
-
-    }
 
 
 
+    @Override
     protected void createDuplicate() {
         XnorGate duplicate = new XnorGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
 
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
 
-        outputNode.setParentGate(this);
-    }
-
+    @Override
     public void checkGateState(){
         if (inputNode1.getState() && !inputNode2.getState() || !inputNode1.getState() && inputNode2.getState()){
             state = false;

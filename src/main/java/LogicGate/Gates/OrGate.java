@@ -82,7 +82,7 @@ public class OrGate extends Gate{
         gateGroup.setTranslateY((sceneHeight/5)*2);
     }
 
-    private void createInputNodes(){
+    protected void createInputNodes(){
         inputNode1 = new GateInputNode(parentPane);
         inputNode2 = new GateInputNode(parentPane);
 

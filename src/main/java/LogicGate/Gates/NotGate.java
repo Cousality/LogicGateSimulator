@@ -1,7 +1,5 @@
 package LogicGate.Gates;
 
-import LogicGate.Nodes.GateInputNode;
-import LogicGate.Nodes.GateOutputNode;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -9,13 +7,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-public class NotGate extends Gate {
+public class NotGate extends BufferGate {
 
     public NotGate(Pane pane, double height, double width){
         super(pane, height, width);
 
     }
-
+    @Override
     public void draw(){
         gateGroup = new Group();
         inputLine1 = new Line(-width/2 , (height/2), 0 , (height/2));
@@ -52,41 +50,12 @@ public class NotGate extends Gate {
         gateGroup.setTranslateY(sceneHeight/5*4);
     }
 
-    private void createInputNodes(){
-        inputNode1 = new GateInputNode(parentPane);
-
-        inputNode1.draw(-100, -100);
-
-        inputNode1.setParentGate(this);
-
-
-    }
-
-    public void createOutPutNode(){
-        outputNode = new GateOutputNode(parentPane);
-        outputNode.draw(-100, -100);
-
-        outputNode.setParentGate(this);
-
-
-
-    }
     @Override
-    public void update(double x, double y){
-        gateGroup.setTranslateX(x);
-        gateGroup.setTranslateY(y);
-
-        if (inputNode1 != null && outputNode != null) {
-            inputNode1.update(x + inputLine1.getStartX(), y +inputLine1.getStartY());
-            outputNode.update(x + outputLine.getEndX(), y + outputLine.getEndY());
-        }
-    }
-
     protected void createDuplicate() {
         NotGate duplicate = new NotGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
-
+    @Override
     public void checkGateState(){
         if (inputNode1.getState()){
             state = false;
