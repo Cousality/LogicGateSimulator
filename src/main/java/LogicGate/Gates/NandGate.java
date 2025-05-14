@@ -11,6 +11,7 @@ public class NandGate extends AndGate {
         super(pane, height, width);
 
     }
+
     @Override
     public void draw() {
         gateGroup = new Group();
@@ -63,13 +64,11 @@ public class NandGate extends AndGate {
         gateGroup.setTranslateY(sceneHeight/5);
     }
 
-
     @Override
     protected void createDuplicate() {
         NandGate duplicate = new NandGate(parentPane, sceneHeight, sceneWidth);
         duplicate.draw();
     }
-
 
     @Override
     public void checkGateState(){
@@ -81,8 +80,4 @@ public class NandGate extends AndGate {
             outputNode.changeState();
         }
     }
-
-
-
-
 }

@@ -47,6 +47,7 @@ public class BufferGate extends Gate {
         gateGroup.setTranslateX(sceneWidth/35);
         gateGroup.setTranslateY(sceneHeight/5*4);
     }
+
     @Override
     protected void createInputNodes(){
         inputNode1 = new GateInputNode(parentPane);
@@ -57,7 +58,6 @@ public class BufferGate extends Gate {
 
 
     }
-
 
     @Override
     public void update(double x, double y){
@@ -84,5 +84,4 @@ public class BufferGate extends Gate {
             outputNode.changeState();
         }
     }
-
 }

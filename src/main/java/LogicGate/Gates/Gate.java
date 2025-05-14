@@ -26,7 +26,6 @@ public abstract class Gate {
     protected Line inputLine2;
     protected Line outputLine;
 
-
     public Gate(Pane pane, double height, double width){
         this.height = height/15;
         this.width = width/25;
@@ -84,13 +83,9 @@ public abstract class Gate {
         System.out.println("Never see");
     }
 
-
-
     public boolean getState(){
         return state;
     }
-
-
 
     public void update(double x, double y){
         gateGroup.setTranslateX(x);
@@ -112,7 +107,6 @@ public abstract class Gate {
 
         inputNode1.setParentGate(this);
         inputNode2.setParentGate(this);
-
 
     }
 
@@ -137,5 +131,4 @@ public abstract class Gate {
         parentPane.getChildren().remove(gateGroup);
 
     }
-
 }

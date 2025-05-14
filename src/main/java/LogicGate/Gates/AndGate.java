@@ -70,8 +70,6 @@ public class AndGate extends Gate {
         duplicate.draw();
     }
 
-
-
     public void checkGateState(){
         if (inputNode1.getState() && inputNode2.getState()){
             state = true;
@@ -81,8 +79,4 @@ public class AndGate extends Gate {
             outputNode.changeState();
         }
     }
-
-
-
-
 }

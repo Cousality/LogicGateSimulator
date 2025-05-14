@@ -69,7 +69,7 @@ public class LogicGateMain extends Application {
         notGate.draw();
 
     }
-
+    // When a Line is click depending on which side is pressed determines what kind of Node is Created
     private static void lineClickHandler(Line line, String type, Pane root) {
         line.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
